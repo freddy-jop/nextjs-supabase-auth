@@ -10,6 +10,7 @@ export const OpimizerEditor = () => {
   const fileUrl = useFileStore((state) => state.file);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+
   if (!fileUrl) return;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

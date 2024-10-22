@@ -8,11 +8,13 @@ export type Dimensions = {
 
 export type FileType = {
   file: string | null;
+  fileType: string | null;
   fileDimension: Dimensions;
   fileOptimized: string | null;
   setFile: (blob: string) => void;
   setFileOptimized: (blobOptima: string) => void;
   setFileDimension: (objDimension: Dimensions) => void;
+  setFileType: (type: string) => void;
   clearFile: () => void;
 };
 
@@ -20,6 +22,7 @@ export const useFileStore = create(
   persist<FileType>(
     (set) => ({
       file: null,
+      fileType: null,
       fileOptimized: null,
       fileDimension: { width: 0, height: 0 },
       setFile: (blob: string) =>
@@ -34,7 +37,17 @@ export const useFileStore = create(
         set({
           fileDimension: objDimension,
         }),
-      clearFile: () => set({ file: null, fileOptimized: null }),
+      setFileType: (type: string) =>
+        set({
+          fileType: type,
+        }),
+      clearFile: () =>
+        set({
+          file: null,
+          fileType: null,
+          fileOptimized: null,
+          fileDimension: { width: 0, height: 0 },
+        }),
     }),
     { name: "file-store" }
   )
