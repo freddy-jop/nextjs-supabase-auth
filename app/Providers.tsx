@@ -1,12 +1,12 @@
-import { Toaster } from "@/components/ui/sonner";
 import { PropsWithChildren } from "react";
+import { Toaster } from "react-hot-toast";
 
 export type ProvidersProps = PropsWithChildren;
 
 export const Providers = (props: ProvidersProps) => {
   return (
     <div>
-      <Toaster />
+      <Toaster position="bottom-center" />
       {props.children}
     </div>
   );

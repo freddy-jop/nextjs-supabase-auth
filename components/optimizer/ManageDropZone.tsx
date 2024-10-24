@@ -5,7 +5,7 @@ import { useFileStore } from "@/store/file.store";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { FileError, FileRejection, useDropzone } from "react-dropzone";
-import { toast } from "sonner";
+import { toast } from "react-hot-toast";
 import { DragContainer } from "./DragContainer";
 
 const maxSizeBytes = 4 * 1024 * 1024;
