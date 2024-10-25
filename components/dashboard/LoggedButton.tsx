@@ -5,10 +5,10 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "../ui/button";
 import { LoggedDropdown } from "./LoggedDropdown";
 
-export const LoggedButton = () => {
+export const LoggedButton = ({ user }: any) => {
   const down = useDropdownStore((state) => state.openDropdown);
   return (
-    <LoggedDropdown>
+    <LoggedDropdown user={user}>
       <Button className="flex items-center px-2 py-8 bg-transparent hover:bg-gray-700 rounded-none w-full">
         <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full overflow-hidden mr-3">
           <div className="flex flex-col items-center justify-center h-full w-full">

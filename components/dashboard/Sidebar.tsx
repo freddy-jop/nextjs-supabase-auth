@@ -53,7 +53,7 @@ const routes = [
   // },
 ];
 
-export const Sidebar = () => {
+export const Sidebar = ({ user }: any) => {
   const pathname = usePathname();
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-gray-900 text-white border-r-4 border-sky-300">
@@ -70,7 +70,7 @@ export const Sidebar = () => {
         </Link>
         <div className="h-[1px] w-full bg-sky-900 space-y-1 mb-4"></div>
         <div>
-          <LoggedButton />
+          <LoggedButton user={user} />
         </div>
         <div className="space-y-1">
           {routes.map((route) => (

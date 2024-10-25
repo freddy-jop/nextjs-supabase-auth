@@ -1,4 +1,4 @@
-import createSupabaseServerClient from "@/lib/supabase/server";
+import { singOutAction } from "@/features/auth/auth.action";
 import { useDropdownStore } from "@/store/dropdown.store";
 import {
   DropdownMenu,
@@ -13,20 +13,22 @@ import { PropsWithChildren } from "react";
 
 export type LoggedDropdownType = PropsWithChildren;
 
-export const LoggedDropdown = (props: LoggedDropdownType) => {
+export const LoggedDropdown = ({
+  children,
+  user,
+}: LoggedDropdownType & any) => {
   const toggleDropdown = useDropdownStore((state) => state.toggleDropdown);
   const router = useRouter();
 
   const logoutAction = async () => {
-    const supabase = await createSupabaseServerClient();
-    await supabase.auth.signOut();
+    singOutAction();
     return router.push("/login");
   };
   return (
     <div className="mb-4">
       <DropdownMenu onOpenChange={() => toggleDropdown()}>
         {/* <DropdownMenuTrigger asChild>hello</DropdownMenuTrigger> */}
-        <DropdownMenuTrigger asChild>{props.children}</DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
         <DropdownMenuContent className="bg-gray-900 border-gray-400 border-2 pt-2 rounded-md w-56">
           <DropdownMenuItem className="w-full hover:bg-gray-700 outline-none py-1">
             <div className="flex items-center w-full px-2">
@@ -79,7 +81,7 @@ export const LoggedDropdown = (props: LoggedDropdownType) => {
           <DropdownMenuItem className="w-full bg-gray-800 outline-none py-2">
             <div className="space-y-1">
               <div className="flex flex-col items-center flex-1">
-                <p className="text-sm text-white">freddy.jopha.dev@gmail.com</p>
+                <p className="text-sm text-white">{user.email}</p>
               </div>
             </div>
           </DropdownMenuItem>
