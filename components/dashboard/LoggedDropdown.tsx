@@ -1,3 +1,5 @@
+import createSupabaseServerClient from "@/lib/supabase/server";
+import { useDropdownStore } from "@/store/dropdown.store";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,12 +8,20 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { Check, LogOut, Settings } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { PropsWithChildren } from "react";
-import { useDropdownStore } from "@/store/dropdown.store";
 
 export type LoggedDropdownType = PropsWithChildren;
+
 export const LoggedDropdown = (props: LoggedDropdownType) => {
   const toggleDropdown = useDropdownStore((state) => state.toggleDropdown);
+  const router = useRouter();
+
+  const logoutAction = async () => {
+    const supabase = await createSupabaseServerClient();
+    await supabase.auth.signOut();
+    return router.push("/login");
+  };
   return (
     <div className="mb-4">
       <DropdownMenu onOpenChange={() => toggleDropdown()}>
@@ -43,7 +53,7 @@ export const LoggedDropdown = (props: LoggedDropdownType) => {
           <DropdownMenuItem className="w-full hover:bg-gray-700 outline-none">
             <div className="space-y-1">
               <Link
-                href="/settings"
+                href="/profile"
                 className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer text-white transition"
               >
                 <div className="flex items-center flex-1">
@@ -55,21 +65,21 @@ export const LoggedDropdown = (props: LoggedDropdownType) => {
           </DropdownMenuItem>
           <DropdownMenuItem className="w-full hover:bg-gray-700 outline-none">
             <div className="space-y-1">
-              <Link
-                href="/logout"
+              <div
+                onClick={logoutAction}
                 className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer text-white transition"
               >
                 <div className="flex items-center flex-1">
                   <LogOut className="h-6 w-6 mr-3 text-gray-400" />
                   Logout
                 </div>
-              </Link>
+              </div>
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem className="w-full bg-gray-800 outline-none py-2">
             <div className="space-y-1">
               <div className="flex flex-col items-center flex-1">
-                <p className="text-sm text-white">jophalupi@gmail.com</p>
+                <p className="text-sm text-white">freddy.jopha.dev@gmail.com</p>
               </div>
             </div>
           </DropdownMenuItem>

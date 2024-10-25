@@ -57,7 +57,7 @@ export const LoginForm = () => {
       if (data?.user) {
         setError("");
         toast.success("successfully logged in");
-        router.push("/");
+        router.push("/dashboard");
       }
     });
   };

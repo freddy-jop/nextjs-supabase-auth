@@ -1,7 +1,5 @@
-"use client";
-
+"use server";
 import Link from "next/link";
-import { Typewriter } from "react-simple-typewriter";
 import { Button } from "../ui/button";
 
 export const LandingHero = () => {
@@ -10,7 +8,7 @@ export const LandingHero = () => {
       <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl space-y-5 font-extrabold">
         <h1>Éditez avec Facilité et Simplicité.</h1>
         <div className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-sky-400">
-          <Typewriter
+          {/* <Typewriter
             words={[
               "Optimiser vos images",
               "Vectoriser",
@@ -27,7 +25,7 @@ export const LandingHero = () => {
             typeSpeed={70}
             deleteSpeed={50}
             delaySpeed={1000}
-          />
+          /> */}
         </div>
       </div>
       <div className="text-sm md:text-xl font-light text-zinc-400">
